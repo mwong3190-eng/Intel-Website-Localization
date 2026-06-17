@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intel: Sustainability Through the Ages</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <div class="hero-copy">
+        <img src="img/intel-header-logo.svg" alt="Intel logo" class="hero-logo" />
+        <h1>Sustainability Through the Ages</h1>
+        <p>
+          Explore Intel's journey through time, discovering how our commitment
+          to innovation has shaped a more sustainable future for technology
+          and our planet.
+        </p>
+      </div>
+    </header>
+
+    <section class="timeline">
+      <div class="timeline-overlay left" aria-hidden="true"></div>
+      <div class="timeline-overlay right" aria-hidden="true"></div>
+      
+
+      <div class="timeline-track">
+        <article class="card">
+          <div class="card-image">
+            <img src="img/1.jpg" alt="Intel founders portrait" />
+          </div>
+          <div class="card-copy">
+            <span class="card-year">1968</span>
+            <h2>Intel Founded</h2>
+            <p>
+              Robert Noyce and Gordon Moore rename the newly formed company
+              NM Electronics to Intel Corporation, laying the foundation for
+              decades of technological innovation.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">
+            <img src="img/2.jpg" alt="Microprocessor circuit board" />
+          </div>
+          <div class="card-copy">
+            <span class="card-year">1971</span>
+            <h2>First Microprocessor</h2>
+            <p>
+              Intel debuts the 4004, the world's first commercial microprocessor,
+              igniting the microprocessor revolution and propelling the future
+              of computing devices.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">
+            <img src="img/3.jpg" alt="Vintage computer processor" />
+          </div>
+          <div class="card-copy">
+            <span class="card-year">1978</span>
+            <h2>8086 Processor</h2>
+            <p>
+              Launch of the 8086 processor, establishing the x86 architecture
+              that drives countless PCs and servers in the modern era.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">
+            <img src="img/4.jpg" alt="Early personal computer" />
+          </div>
+          <div class="card-copy">
+            <span class="card-year">1985</span>
+            <h2>386 Processor</h2>
+            <p>
+              Intel introduces the 386 processor with 32-bit architecture,
+              ushering in a new era of performance and multitasking for
+              personal computers.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">
+            <img src="img/1.jpg" alt="Intel campus sustainability work" />
+          </div>
+          <div class="card-copy">
+            <span class="card-year">2006</span>
+            <h2>Peak GHG Emissions</h2>
+            <p>
+              This year marks Intel's highest annual greenhouse gas emissions
+              for operations. Over subsequent years, Intel invests heavily in
+              renewable energy, energy efficiency, and chemical abatement.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">
+            <img src="img/2.jpg" alt="Sustainability strategy planning" />
+          </div>
+          <div class="card-copy">
+            <span class="card-year">2020</span>
+            <h2>RISE Strategy</h2>
+            <p>
+              Intel launches its RISE (Responsible, Inclusive, Sustainable,
+              Enabling) strategy and 2030 goals, aiming to drive progress on
+              climate action, water stewardship, and waste reduction.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">
+            <img src="img/3.jpg" alt="Clean energy powered facility" />
+          </div>
+          <div class="card-copy">
+            <span class="card-year">2022</span>
+            <h2>Net-Zero By 2040</h2>
+            <p>
+              Intel announces its commitment to achieve net-zero greenhouse gas
+              emissions (Scope 1 and 2) across its global operations by 2040.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">
+            <img src="img/4.jpg" alt="Renewable electricity at campus" />
+          </div>
+          <div class="card-copy">
+            <span class="card-year">2023</span>
+            <h2>Renewable Electricity</h2>
+            <p>
+              The company achieves 99% renewable electricity usage worldwide,
+              helping to drastically lower carbon emissions and drive progress
+              toward long-term sustainability goals.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image">
+            <img src="img/1.jpg" alt="Sustainability summit collaboration" />
+          </div>
+          <div class="card-copy">
+            <span class="card-year">2024</span>
+            <h2>Sustainability Summit</h2>
+            <p>
+              Intel hosts its first Sustainability Summit, uniting suppliers,
+              government officials, and industry leaders to collaborate on
+              next-generation sustainable semiconductor manufacturing.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      
+    </section>
+  </main>
+  <script>
+    const timelineTrack = document.querySelector('.timeline-track');
+    const rightOverlay = document.querySelector('.timeline-overlay.right');
+    const leftOverlay = document.querySelector('.timeline-overlay.left');
+
+    const isMobileScreen = () => window.innerWidth <= 768;
+
+    // ===== DESKTOP HOVER BEHAVIOR =====
+    let currentShift = 0;
+    let animationFrame = null;
+    let lastTime = null;
+    let direction = 0;
+    const maxShift = 62;
+    const speed = 0.0074;
+
+    const updatePosition = (time) => {
+      if (lastTime === null) {
+        lastTime = time;
+      }
+
+      const delta = time - lastTime;
+      currentShift = Math.min(Math.max(currentShift + direction * speed * delta, 0), maxShift);
+      timelineTrack.style.transform = `translateX(-${currentShift}%)`;
+      lastTime = time;
+
+      const shouldContinue = (direction === 1 && currentShift < maxShift) || (direction === -1 && currentShift > 0);
+      if (shouldContinue) {
+        animationFrame = requestAnimationFrame(updatePosition);
+      } else {
+        animationFrame = null;
+      }
+    };
+
+    const startScroll = (dir) => {
+      direction = dir;
+      if (!animationFrame) {
+        lastTime = null;
+        animationFrame = requestAnimationFrame(updatePosition);
+      }
+    };
+
+    const stopScroll = () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+        animationFrame = null;
+      }
+      lastTime = null;
+      direction = 0;
+    };
+
+    // Only attach hover behavior on desktop
+    if (rightOverlay && !isMobileScreen()) {
+      rightOverlay.addEventListener('mouseenter', () => startScroll(1));
+      rightOverlay.addEventListener('mouseleave', stopScroll);
+    }
+
+    if (leftOverlay && !isMobileScreen()) {
+      leftOverlay.addEventListener('mouseenter', () => startScroll(-1));
+      leftOverlay.addEventListener('mouseleave', stopScroll);
+    }
+
+    // ===== MOBILE SWIPE BEHAVIOR =====
+    const cards = document.querySelectorAll('.card');
+    let currentCardIndex = 0;
+    let touchStartX = 0;
+    let isSwiping = false;
+    const swipeThreshold = 50;
+
+    const getCardDimensions = () => {
+      if (cards.length === 0) return { cardWidth: 0, gap: 0 };
+      const card = cards[0];
+      const cardWidth = card.offsetWidth;
+      
+      // Get gap value and convert to pixels
+      const gapStyle = window.getComputedStyle(timelineTrack);
+      let gapPx = 0;
+      const gapValue = gapStyle.gap;
+      if (gapValue) {
+        if (gapValue.includes('rem')) {
+          gapPx = parseFloat(gapValue) * 16;
+        } else if (gapValue.includes('px')) {
+          gapPx = parseFloat(gapValue);
+        }
+      }
+      
+      return { cardWidth, gap: gapPx };
+    };
+
+    const moveToCard = (index) => {
+      if (index < 0) index = 0;
+      if (index >= cards.length) index = cards.length - 1;
+
+      currentCardIndex = index;
+      const { cardWidth, gap } = getCardDimensions();
+      const translateX = -(index * (cardWidth + gap));
+
+      timelineTrack.style.transition = 'transform 0.5s ease-out';
+      timelineTrack.style.transform = `translateX(${translateX}px)`;
+    };
+
+    timelineTrack.addEventListener('touchstart', (e) => {
+      if (!isMobileScreen()) return;
+      // Swipe disabled: mobile now has vertical stacked layout
+      isSwiping = false;
+    }, false);
+
+    timelineTrack.addEventListener('touchend', (e) => {
+      if (!isMobileScreen() || !isSwiping) return;
+      // Swipe disabled: mobile now has vertical stacked layout
+      isSwiping = false;
+    }, false);
+
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (!isMobileScreen()) {
+          // Resized to desktop - reset timeline
+          timelineTrack.style.transform = 'none';
+          timelineTrack.style.transition = 'none';
+          currentCardIndex = 0;
+        }
+      }, 250);
+    });
+  </script>
+    <script>
+      // Prevent widow in hero title on mobile: glue last two words together
+      (function() {
+        if (window.innerWidth > 768) return;
+        const h = document.querySelector('.hero h1');
+        if (!h) return;
+        const txt = h.textContent.trim();
+        const parts = txt.split(/\s+/);
+        if (parts.length < 3) return;
+        // Join last two words with non-breaking space
+        parts[parts.length - 2] = parts[parts.length - 2] + '\u00A0' + parts[parts.length - 1];
+        parts.pop();
+        h.textContent = parts.join(' ');
+      })();
+    </script>
+</body>
+</html>
